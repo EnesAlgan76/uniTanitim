@@ -151,7 +151,7 @@ class Fakuteler extends StatelessWidget {
                     onPressed: (){},
                     child: Text("KEŞFET"),
                     style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.deepPurple
+                        backgroundColor: Color(0xff890093)
                     ),
                   ),
                 ),
