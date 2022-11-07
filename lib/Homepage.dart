@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:uni_tanitim/CategoryPage.dart';
 import 'package:uni_tanitim/FirebaseOperations.dart';
 
 class Homepage extends StatelessWidget {
@@ -31,29 +32,33 @@ class Homepage extends StatelessWidget {
                     // },
                     // child: Text("Add Category")),
                     for(int i=0; i<snapshot.data.length; i++)
-                      Container(
-                        height: 150,
-                        margin: EdgeInsets.all(8),
-                        child: ClipRRect(
-                          borderRadius: BorderRadius.circular(15),
-                          child: Stack(
-                            alignment: Alignment.center,
-                            children: [
-                              Image.network(snapshot.data[i]["image"], fit: BoxFit.cover,width: 500,),
-                              Container(
-                                padding: EdgeInsets.only(left: 10,right: 10),
-                                alignment: i%2==0?Alignment.centerLeft:Alignment.centerRight,
-                                width: double.infinity,height: 50,color: Color(0x5C000000),
-                                child: Column(
-                                  children: [
-                                    Text(snapshot.data[i]["title"], style: TextStyle(fontWeight: FontWeight.bold,fontSize: 25,color: Colors.white),),
-                                    Text(snapshot.data[i]["description"], style: TextStyle(fontSize: 16,color: Colors.white),),
-                                  ],
+                      GestureDetector(
+                        onTap: (){
+                          Navigator.push(context, MaterialPageRoute(builder: (context) => CategoryPage()));
+                        },
+                        child: Container(
+                          height: 150,
+                          margin: EdgeInsets.all(8),
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(15),
+                            child: Stack(
+                              alignment: Alignment.center,
+                              children: [
+                                Image.network(snapshot.data[i]["image"], fit: BoxFit.cover,width: 500,),
+                                Container(
+                                  padding: EdgeInsets.only(left: 10,right: 10),
+                                  alignment: i%2==0?Alignment.centerLeft:Alignment.centerRight,
+                                  width: double.infinity,height: 50,color: Color(0x5C000000),
+                                  child: Column(
+                                    children: [
+                                      Text(snapshot.data[i]["title"], style: TextStyle(fontWeight: FontWeight.bold,fontSize: 25,color: Colors.white),),
+                                      Text(snapshot.data[i]["description"], style: TextStyle(fontSize: 16,color: Colors.white),),
+                                    ],
+                                  ),
                                 ),
-                              ),
-                            ],
+                              ],
+                            ),
                           ),
-
                         ),
                       ),
                   ],

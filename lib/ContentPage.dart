@@ -16,12 +16,13 @@ class ContentPage extends StatelessWidget {
           child: AppBar(
             backgroundColor: Colors.black87,
             title: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text("Mühendislik Fakültesi", style: TextStyle(color: Colors.white, fontSize: 17),),
-                Spacer(),
+                Flexible(child: Text("Mühendislik Fakültesi", style: TextStyle(color: Colors.white, fontSize: 17),overflow: TextOverflow.fade,)),
+
                 Container(
-                  margin: EdgeInsets.symmetric(vertical: 7),
-                  padding: EdgeInsets.symmetric(vertical: 5, horizontal: 10),
+                  margin: EdgeInsets.only(top: 7,bottom: 7,left: 15),
+                  padding: EdgeInsets.symmetric(vertical: 2, horizontal: 8),
                   decoration: BoxDecoration(border: Border.all(color: Colors.white,width: 1.5), borderRadius: BorderRadius.circular(12)) ,
                   alignment: Alignment.center,
                   child: GestureDetector(
@@ -30,7 +31,7 @@ class ContentPage extends StatelessWidget {
                     },
                     child: Row(
                       children: [
-                        Text("Ekleme Yap ",style: TextStyle(fontSize: 17, color: Colors.white)),
+                        Text("Ekleme Yap ",style: TextStyle(fontSize: 15, color: Colors.white, fontWeight: FontWeight.w300)),
                         Icon(Icons.add, color: Colors.white,)
                       ],
                     ),

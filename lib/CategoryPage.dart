@@ -1,7 +1,6 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:uni_tanitim/ContentPage.dart';
 import 'package:uni_tanitim/models/Content.dart';
 import 'package:uni_tanitim/models/HomeCategoryContents.dart';
 
@@ -99,63 +98,68 @@ class Fakuteler extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Stack(
-      alignment: Alignment.center,
-      children: [
-        Container(
-          // color: Colors.yellow,
-          margin: EdgeInsets.all(8),
-          width: 200,
-          height: 300,
-          child: ClipRRect(
-            borderRadius: BorderRadius.circular(15),
-            child: Image.network(image, fit: BoxFit.cover, color: Colors.white.withOpacity(0.5), colorBlendMode: BlendMode.modulate,),
+    return GestureDetector(
+      onTap: (){
+        Navigator.push(context, MaterialPageRoute(builder: (context)=>ContentPage()));
+      },
+      child: Stack(
+        alignment: Alignment.center,
+        children: [
+          Container(
+            // color: Colors.yellow,
+            margin: EdgeInsets.all(8),
+            width: 200,
+            height: 300,
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(15),
+              child: Image.network(image, fit: BoxFit.cover, color: Colors.white.withOpacity(0.5), colorBlendMode: BlendMode.modulate,),
+            ),
           ),
-        ),
-        Column(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: [
-            Container(
-                width: 200,
-                color: Color(0x6f000000),
-                child: Padding(
-                  padding: const EdgeInsets.all(8),
-                  child:Text(title,style: TextStyle(color: Colors.white,fontSize: 20),textAlign: TextAlign.center,),
-                )
-            ),
-            Container(
-                width: 200,
-                color: Color(0x6f000000),
-                child: Padding(
-                  padding: const EdgeInsets.all(8),
-                  child:Text(description,style: TextStyle(color: Colors.white,fontSize: 15),textAlign: TextAlign.center,),
-                )
-            ),
-          ],
-        ),
-        Container(
-          margin: EdgeInsets.only(top: 200),
-          height: 100,
-          width: 100,
-          // color: Colors.greenAccent,
-          child: Stack(
-            alignment: Alignment.bottomCenter,
+          Column(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               Container(
-                margin: EdgeInsets.only(top: 25),
-                // color: Colors.pink,
-                child: ElevatedButton(
-                  onPressed: (){},
-                  child: Text("KEŞFET"),
-                  style: ElevatedButton.styleFrom(
-                      primary: Colors.deepPurple
-                  ),
-                ),
+                  width: 200,
+                  color: Color(0x6f000000),
+                  child: Padding(
+                    padding: const EdgeInsets.all(8),
+                    child:Text(title,style: TextStyle(color: Colors.white,fontSize: 20),textAlign: TextAlign.center,),
+                  )
+              ),
+              Container(
+                  width: 200,
+                  color: Color(0x6f000000),
+                  child: Padding(
+                    padding: const EdgeInsets.all(8),
+                    child:Text(description,style: TextStyle(color: Colors.white,fontSize: 15),textAlign: TextAlign.center,),
+                  )
               ),
             ],
           ),
-        ),
-      ],
+          Container(
+            margin: EdgeInsets.only(top: 200),
+            height: 100,
+            width: 100,
+            // color: Colors.greenAccent,
+            child: Stack(
+              alignment: Alignment.bottomCenter,
+              children: [
+                Container(
+                  margin: EdgeInsets.only(top: 25),
+                  // color: Colors.pink,
+                  child: ElevatedButton(
+                    onPressed: (){},
+                    child: Text("KEŞFET"),
+                    style: ElevatedButton.styleFrom(
+                        backgroundColor: Colors.deepPurple
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
     );
   }
 }
@@ -178,19 +182,24 @@ class Diger extends StatelessWidget {
 
         ),
         itemBuilder: (context,indeks){
-          return Container(
-            child: Column(
-              children: [
-                Container(
-                  width: 120,
-                  height: 110,
-                  decoration: BoxDecoration(
-                    color: colorList[indeks],
-                    borderRadius: BorderRadius.all(Radius.circular(10)),
+          return GestureDetector(
+            onTap: (){
+              Navigator.push(context, MaterialPageRoute(builder: (context)=>ContentPage()));
+            },
+            child: Container(
+              child: Column(
+                children: [
+                  Container(
+                    width: 120,
+                    height: 110,
+                    decoration: BoxDecoration(
+                      color: colorList[indeks],
+                      borderRadius: BorderRadius.all(Radius.circular(10)),
+                    ),
                   ),
-                ),
-                Text(places[indeks],style: TextStyle(fontSize: 14,color: Colors.white)),
-              ],
+                  Text(places[indeks],style: TextStyle(fontSize: 14,color: Colors.white)),
+                ],
+              ),
             ),
           );
         }
