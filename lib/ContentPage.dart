@@ -6,7 +6,17 @@ import 'package:uni_tanitim/VideosViewPage.dart';
 import 'package:uni_tanitim/widgets/contentWidget.dart';
 
 class ContentPage extends StatelessWidget {
+  late   List<dynamic> contents;
+  late String coverImage;
+  late String categoryName;
+  late List<dynamic> galeriImage;
+
+  ContentPage({required this.contents,required this.coverImage,required this.categoryName,required this.galeriImage}) ;
+
+
   FirebaseOperations firebaseOperations = FirebaseOperations();
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +29,8 @@ class ContentPage extends StatelessWidget {
             title: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Flexible(child: Text("Mühendislik Fakültesi", style: TextStyle(color: Colors.white, fontSize: 17),overflow: TextOverflow.fade,)),
+
+                Flexible(child: Text(categoryName, style: TextStyle(color: Colors.white, fontSize: 17),overflow: TextOverflow.fade,)),
 
                 Container(
                   margin: EdgeInsets.only(top: 7,bottom: 7,left: 15),
@@ -32,11 +43,7 @@ class ContentPage extends StatelessWidget {
                     },
                     child: Row(
                       children: [
-                        GestureDetector(
-                          onTap: (){
-                           // Navigator.push(context, MaterialPageRoute(builder: (context) =>AddingPage()));
-                          },
-                            child: Text("Ekleme Yap ",style: TextStyle(fontSize: 15, color: Colors.white, fontWeight: FontWeight.w300))),
+                        Text("Ekleme Yap ",style: TextStyle(fontSize: 15, color: Colors.white, fontWeight: FontWeight.w300)),
                         Icon(Icons.add, color: Colors.white,)
                       ],
                     ),
@@ -56,12 +63,12 @@ class ContentPage extends StatelessWidget {
                 Container(
                     height:250,
                     width: width,
-                    child:Image.asset("assets/muhendislik.PNG",fit: BoxFit.cover,)),
+                    child:Image.network(coverImage,fit: BoxFit.cover,)),
                 Row(
                   children: [
                     Flexible(child: GestureDetector(
                       onTap: (){
-                        Navigator.push(context, MaterialPageRoute(builder: (context)=>VideosViewPage()));
+                        // Navigator.push(context, MaterialPageRoute(builder: (context)=>VideosViewPage()));
                       },
                       child: Container(
                         height: 45,
@@ -76,7 +83,7 @@ class ContentPage extends StatelessWidget {
                     ),
                     Flexible(child: GestureDetector(
                       onTap: (){
-                        Navigator.push(context, MaterialPageRoute(builder: (context)=>ImageViewPage()));
+                        Navigator.push(context, MaterialPageRoute(builder: (context)=>ImageViewPage(galeriImage: galeriImage,)));
                       },
                       child: Container(
                         height: 45,
@@ -98,9 +105,9 @@ class ContentPage extends StatelessWidget {
             Container(
               width: double.infinity,
               decoration: BoxDecoration(color: Color(0xffececec), borderRadius: BorderRadius.vertical(bottom: Radius.circular(18))),
-              child: ContentWidget(content: "  Corona virüs salgını tüm dünyayı etkisi altına alırken sanatçıları da harekete geçirdi. Dünyanın farklı şehirlerinden pek çok sokak ressamı, duvarları salgın temalı resimlerle bezedi.Corona virüs salgını tüm dünyayı etkisi altına alırken sanatçıları da harekete geçirdi. Dünyanın farklı şehirlerinden pek çok sokak ressamı, duvarları salgın temalı resimlerle bezedi.Corona virüs salgını tüm dünyayı etkisi altına alırken sanatçıları da harekete geçirdi. Dünyanın farklı şehirlerinden pek çok sokak ressamı, duvarları salgın temalı resimlerle bezedi.syd",
-                imageLink:"https://cdn1.ntv.com.tr/gorsel/ks_hXXjQy0-_BVNgNraKdw.jpg?width=1000&mode=both&scale=both&v=1587280799431" ,
-                title: "Corona",
+              child: ContentWidget(content: contents[0]["content"],
+                imageLink:contents[0]["image"] ,
+                title: contents[0]["title"],
               ),
             ),
           ]

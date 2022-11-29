@@ -5,7 +5,6 @@ import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:path/path.dart';
 import 'package:path_provider/path_provider.dart';
-import 'package:uni_tanitim/ContentPage.dart';
 import 'package:uni_tanitim/GetxControllerClass.dart';
 import 'package:uni_tanitim/SharedPreferencesOperations.dart';
 import 'package:uni_tanitim/widgets/imageGridWidget.dart';

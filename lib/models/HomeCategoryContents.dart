@@ -2,13 +2,16 @@ import 'package:uni_tanitim/models/Content.dart';
 
 class HomeCategoryContents{
   String categoryName;
-  List<Map<String,dynamic>> contents;
+  List<Map<dynamic,dynamic>> contents;
   String description;
   String image;
   String universityId;
+  String title;
+  List<dynamic> galeriImage;
 
   HomeCategoryContents({required this.categoryName, required this.contents,
-    required this.description,required this.image,required this.universityId});
+    required this.description,required this.image,required this.universityId,
+    required this.title,required this.galeriImage});
 
   Map<String, dynamic> toMap() {
     return {
@@ -20,13 +23,27 @@ class HomeCategoryContents{
     };
   }
 
-  factory HomeCategoryContents.fromMap(Map<String, dynamic> map) {
+  Map<String, dynamic> toMapDiger() {
+    return {
+      'categoryName': this.categoryName,
+      'contents': this.contents,
+      'image': this.image,
+      'title': this.title,
+      'galeriImage': this.galeriImage,
+
+    };
+  }
+
+  factory HomeCategoryContents.fromMap(Map<dynamic, dynamic> map) {
     return HomeCategoryContents(
-      categoryName: map['categoryName'] as String,
-      contents: map['contents'] as List<Map<String, dynamic>>,
-      description: map['description'] as String,
-      image: map['image'] as String,
-      universityId: map['universityId'] as String,
+      categoryName: map['categoryName'],
+      contents: map['contents'],
+      description: map['description'],
+      image: map['image'],
+      universityId: map['universityId'],
+      title: map['title'],
+      galeriImage: map['galeriImage'],
+
     );
   }
 }
