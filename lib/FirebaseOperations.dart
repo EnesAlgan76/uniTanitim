@@ -1,6 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:uni_tanitim/models/InitCategory.dart';
-
 import 'models/Content.dart';
 import 'models/HomeCategoryContents.dart';
 
@@ -21,7 +20,6 @@ class FirebaseOperations{
 
   Future<List<QueryDocumentSnapshot<Map<String, dynamic>>>> getHomeCategories()async{
     var userDocument = await firestore.collection("homeCategories").get();
-    print("--------------------------------- ${userDocument.docs[0]["title"]}");
 
     return userDocument.docs;
   }
@@ -33,7 +31,6 @@ class FirebaseOperations{
 
   Future<List<QueryDocumentSnapshot<Map<String, dynamic>>>> getContents()async{
     var contentMap = await firestore.collection("initCategoriesContent").get();
-    print("--------------------------------- ${contentMap}");
 
     return contentMap.docs;
   }

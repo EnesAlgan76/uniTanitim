@@ -1,9 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:uni_tanitim/CategoryPage.dart';
 import 'package:uni_tanitim/FirebaseOperations.dart';
+import 'package:uni_tanitim/test.dart';
 
 class Homepage extends StatelessWidget {
   FirebaseOperations firebaseOperations = FirebaseOperations();
+
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -61,6 +66,15 @@ class Homepage extends StatelessWidget {
                           ),
                         ),
                       ),
+
+                    ElevatedButton(
+                        onPressed: (){
+                          Get.to(Test());
+                        },
+                        child: Text("Test Sayfasına Geç")
+                    ),
+
+                    
                   ],
                 );
               }else{

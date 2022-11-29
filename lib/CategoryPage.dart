@@ -66,7 +66,7 @@ class _CategoryPageState extends State<CategoryPage> {
                       setState(() {
                         Content content = Content(content: "içerik 1",title: "başlık 1", image: "resim1");
                         Content content2 = Content(content: "içerik 2",title: "başlık 2", image: "resim2");
-                        HomeCategoryContents homeCategoryContent = HomeCategoryContents(categoryName: "Mühendislik Fakültesi", contents: [content.toMap(),content2.toMap()], description: "Mühendislik Fakültesi Açıklama",
+                        HomeCategoryContents homeCategoryContent = HomeCategoryContents(categoryName: "Spor Bilimler", contents: [content.toMap(),content2.toMap()], description: "Mühendislik Fakültesi Açıklama",
                             image: "https://firebasestorage.googleapis.com/v0/b/uni-project-f6db7.appspot.com/o/imgContentPage%2Fmuhendislik.jpg?alt=media&token=6c2c26b7-fcff-4b07-8606-e2039f3558e5", universityId: "msku");
 
                         firebaseOperations.addData(homeCategoryContent);
@@ -191,7 +191,7 @@ class Diger extends StatelessWidget {
                 children: [
                   Container(
                     width: 120,
-                    height: 110,
+                    height: 90,
                     decoration: BoxDecoration(
                       color: colorList[indeks],
                       borderRadius: BorderRadius.all(Radius.circular(10)),

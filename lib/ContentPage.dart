@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:uni_tanitim/AddingPage.dart';
 import 'package:uni_tanitim/FirebaseOperations.dart';
 import 'package:uni_tanitim/ImagesViewPage.dart';
 import 'package:uni_tanitim/VideosViewPage.dart';
@@ -31,7 +32,11 @@ class ContentPage extends StatelessWidget {
                     },
                     child: Row(
                       children: [
-                        Text("Ekleme Yap ",style: TextStyle(fontSize: 15, color: Colors.white, fontWeight: FontWeight.w300)),
+                        GestureDetector(
+                          onTap: (){
+                           // Navigator.push(context, MaterialPageRoute(builder: (context) =>AddingPage()));
+                          },
+                            child: Text("Ekleme Yap ",style: TextStyle(fontSize: 15, color: Colors.white, fontWeight: FontWeight.w300))),
                         Icon(Icons.add, color: Colors.white,)
                       ],
                     ),
