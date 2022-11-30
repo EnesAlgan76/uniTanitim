@@ -40,7 +40,6 @@ dependencies:
   path:
   get: ^4.6.5
   shared_preferences: ^2.0.15
-  speech_to_text: ^6.1.0
   flutter_tts: ^3.6.2
 
 

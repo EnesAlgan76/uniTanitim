@@ -147,13 +147,16 @@ class AddingPage extends StatelessWidget {
       ),
 
       floatingActionButton: FloatingActionButton.extended(
-        onPressed: () {
-          for(var filePath in getxController.userImages.value){
+        onPressed: () async {
+          for(String filePath in getxController.userImages.value){
             File file   =File(filePath);
-            //firebaseStorage.ref().child("userFiles/${filePath}").putFile(file);
+            await firebaseStorage.ref()
+                .child("gallery/${whichCategory.replaceAll(" ", "")}/${filePath.substring(filePath.length-23)}")
+                .putFile(file);
             print(filePath);
 
             }
+
         },
         label: const Text('Gönder'),
         icon: const Icon(Icons.send_rounded),

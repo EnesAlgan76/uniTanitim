@@ -9,7 +9,9 @@ class VideosViewPage extends StatelessWidget {
     return Scaffold(
       body: Column(
         children: [
-          YoutubePlayerWidget(),
+          Container(
+            height: 700,
+              child: YoutubePlayerWidget()),
         ],
       ),
     );

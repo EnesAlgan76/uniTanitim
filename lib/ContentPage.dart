@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:get/state_manager.dart';
 import 'package:uni_tanitim/AddingPage.dart';
 import 'package:uni_tanitim/FirebaseOperations.dart';
 import 'package:uni_tanitim/ImagesViewPage.dart';
@@ -39,7 +41,8 @@ class ContentPage extends StatelessWidget {
                   alignment: Alignment.center,
                   child: GestureDetector(
                     onTap: (){
-                      print(firebaseOperations.getContents());
+                      Get.to(AddingPage(whichCategory: categoryName));
+                      print(firebaseOperations.getContents().toString());
                     },
                     child: Row(
                       children: [
@@ -68,7 +71,7 @@ class ContentPage extends StatelessWidget {
                   children: [
                     Flexible(child: GestureDetector(
                       onTap: (){
-                        // Navigator.push(context, MaterialPageRoute(builder: (context)=>VideosViewPage()));
+                        Navigator.push(context, MaterialPageRoute(builder: (context)=>VideosViewPage()));
                       },
                       child: Container(
                         height: 45,
