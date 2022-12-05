@@ -30,6 +30,7 @@ class AddingPage extends StatelessWidget {
                 Container(height: 60,
                   child: Row(
                     children: [
+			//khdsblfgdlg
 
                       IconButton(
                           onPressed: (){
