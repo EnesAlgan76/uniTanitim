@@ -34,6 +34,29 @@ class _CategoryPageState extends State<CategoryPage> {
 
         body: ListView(
           children: [
+            ElevatedButton(
+                onPressed: (){
+                  Content content1 = Content(content: "içerik", title: "başlık", image: "");
+                  Content content2 = Content(content: "içerik 2", title: "başlık 2", image: "");
+                  List<String> galeriImages = ["image link 1","image link 2"];
+                  HomeCategoryContents category = HomeCategoryContents(
+                      categoryName: "${widget.title} kategori",
+                      contents: [content1.toMap(),content2.toMap()],
+                      description: "Açıklama",
+                      coverImage: "Resim",
+                      universityId:"mskü",
+                      title: widget.title,
+                      galleryImages: galeriImages
+                  );
+                  firestore.addData(category);
+                },
+
+                onLongPress: (){
+
+                },
+                child: Text("${widget.title}'e Kategori Ekle")
+            ),
+            Text("Diğer için basılı tut"),
             Padding(
               padding: EdgeInsets.only(left: 15),
               child: Text(widget.subtitle,style: TextStyle(fontSize: 18,color: Colors.white),),
@@ -53,7 +76,7 @@ class _CategoryPageState extends State<CategoryPage> {
                           children: [
                             //for(var i in resimler())
                             for(var i in snapshot.data)
-                              Fakuteler(i["categoryName"],i["description"],i["image"],i["contents"],i["galeriImage"]),
+                              Fakuteler(i["categoryId"],i["categoryName"],i["description"],i["coverImage"],i["contents"],i["galleryImages"]),
                           ],
                         ),
                       ),
@@ -95,12 +118,13 @@ class _CategoryPageState extends State<CategoryPage> {
 
 
 class Fakuteler extends StatelessWidget {
+  String categoryId;
   String title;
   String description;
   String image;
   List<dynamic> contents;
   List<dynamic> galeriImage;
-  Fakuteler(this.title,this.description,this.image,this.contents,this.galeriImage);
+  Fakuteler(this.categoryId, this.title,this.description,this.image,this.contents,this.galeriImage);
 
   @override
   Widget build(BuildContext context) {
@@ -151,7 +175,7 @@ class Fakuteler extends StatelessWidget {
                 // color: Colors.pink,
                 child: ElevatedButton(
                   onPressed: (){
-                    Navigator.push(context, MaterialPageRoute(builder: (context) => ContentPage(contents: contents,coverImage: image,
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => ContentPage(categoryId: categoryId, contents: contents,coverImage: image,
                       categoryName: title, galeriImage: galeriImage,)));
                   },
                   child: Text("KEŞFET",style: TextStyle(fontFamily: 'Quicksand'),),
@@ -170,9 +194,6 @@ class Fakuteler extends StatelessWidget {
 
 class Diger extends StatelessWidget {
   List<Color> colorList= [Color(0xffffe500),Color(0xffd60061),Color(0xff008feb),Color(0xffdbdbdb),Color(0xff00bb50),Color(0xffff8a00)];
-  List<String> places= ["Yemekhane","Gençlik Merkezleri","Kütüphane","Kültür Merkezi","Kantinler","Diğer"];
-  List assetImages = ["yemekhane2.png","genclikMerkezi.png","kutuphane.png",
-    "kulturMerkezi.png","kantin.png","diger.png"]; //kampüs sayfasınde diger kısım eklenirken kullanıldı
 
 
   late List digerList;
@@ -193,7 +214,7 @@ class Diger extends StatelessWidget {
             children: [
               GestureDetector(
                 onTap: (){
-                  Navigator.push(context, MaterialPageRoute(builder: (context) => ContentPage(contents: digerList[indeks]["contents"],
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => ContentPage(categoryId:digerList[indeks]["categoryId"], contents: digerList[indeks]["contents"],
                     coverImage: digerList[indeks]["image"], categoryName: digerList[indeks]["title"], galeriImage: digerList[indeks]["galeriImage"],)));
                 },
                 child: Stack(
@@ -212,7 +233,7 @@ class Diger extends StatelessWidget {
                         width: 70,
                         child:
                         digerList[indeks]["title"] =="Kampüs" ?
-                        Image.asset(assetImages[indeks],fit: BoxFit.cover,)
+                        Image.network(digerList[indeks]["image"],fit: BoxFit.cover,)
                             :
                         Image.asset("placeholder.png",fit: BoxFit.cover,)
 

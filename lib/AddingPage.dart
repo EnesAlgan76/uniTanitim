@@ -5,19 +5,22 @@ import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:path/path.dart';
 import 'package:path_provider/path_provider.dart';
+import 'package:uni_tanitim/FirebaseOperations.dart';
 import 'package:uni_tanitim/GetxControllerClass.dart';
 import 'package:uni_tanitim/SharedPreferencesOperations.dart';
 import 'package:uni_tanitim/widgets/imageGridWidget.dart';
 
 class AddingPage extends StatelessWidget {
   String whichCategory;
-  AddingPage({required this.whichCategory});
+  String categoryId;
+  AddingPage({required this.categoryId,required this.whichCategory});
 
   @override
   Widget build(BuildContext context) {
 
     GetxControllerClass getxController = Get.put(GetxControllerClass());
     final firebaseStorage = FirebaseStorage.instance;
+    FirebaseOperations firebaseOperations = FirebaseOperations();
     return Scaffold(
       body: SafeArea(
         child: Stack(
@@ -150,9 +153,12 @@ class AddingPage extends StatelessWidget {
         onPressed: () async {
           for(String filePath in getxController.userImages.value){
             File file   =File(filePath);
-            await firebaseStorage.ref()
-                .child("gallery/${whichCategory.replaceAll(" ", "")}/${filePath.substring(filePath.length-23)}")
-                .putFile(file);
+            var profileRef = FirebaseStorage.instance.ref("Images/HomeCategoriesContents/${whichCategory.replaceAll(" ", "")}/gallery/${filePath.substring(filePath.length-23)}");
+
+            profileRef.putFile(file).whenComplete(() async{
+              String url = await profileRef.getDownloadURL();
+              await firebaseOperations.updateGallery(categoryId,url);
+            });
             print(filePath);
 
             }

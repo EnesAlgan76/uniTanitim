@@ -21,13 +21,6 @@ class FirebaseOperations{
 
 
 
-  Future<List<QueryDocumentSnapshot<Map<String, dynamic>>>> getContents()async{
-    var contentMap = await firestore.collection("initCategoriesContent").get();
-
-    return contentMap.docs;
-  }
-
-
 
   Future<List> getPlaceUni({required String title}) async{
     var placeDocuments =await firestore.collection("homeCategoryContent").get();
@@ -39,8 +32,16 @@ class FirebaseOperations{
     }
     return result;
   }
+
   Future<void> addData(HomeCategoryContents homeCategoryContents) async{
-    await firestore.collection("homeCategoryContent").add(homeCategoryContents.toMap());
+    String yeniDataId = firestore.collection("homeCategoryContent").doc().id;
+    var map = homeCategoryContents.toMap();
+    map["categoryId"] =yeniDataId;  // adding categoryId
+    await firestore.doc("homeCategoryContent/${yeniDataId}").set(map);
+  }
+
+  Future<void> updateGallery(String categoryId, String imageLink)async{
+    await firestore.doc("homeCategoryContent/${categoryId}").update({"galleryImages.1" :imageLink});
   }
 
   Future<List> getPlaceDiger({required String title}) async{

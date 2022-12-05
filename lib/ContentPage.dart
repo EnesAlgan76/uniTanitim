@@ -1,3 +1,4 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/state_manager.dart';
@@ -6,14 +7,17 @@ import 'package:uni_tanitim/FirebaseOperations.dart';
 import 'package:uni_tanitim/ImagesViewPage.dart';
 import 'package:uni_tanitim/VideosViewPage.dart';
 import 'package:uni_tanitim/widgets/contentWidget.dart';
+import 'package:uni_tanitim/widgets/linkWidget.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class ContentPage extends StatelessWidget {
-  late   List<dynamic> contents;
+  String categoryId;
+  late List<dynamic> contents;
   late String coverImage;
   late String categoryName;
   late List<dynamic> galeriImage;
 
-  ContentPage({required this.contents,required this.coverImage,required this.categoryName,required this.galeriImage}) ;
+  ContentPage({required this.categoryId,required this.contents,required this.coverImage,required this.categoryName,required this.galeriImage}) ;
 
 
   FirebaseOperations firebaseOperations = FirebaseOperations();
@@ -41,8 +45,7 @@ class ContentPage extends StatelessWidget {
                   alignment: Alignment.center,
                   child: GestureDetector(
                     onTap: (){
-                      Get.to(AddingPage(whichCategory: categoryName));
-                      print(firebaseOperations.getContents().toString());
+                      Get.to(AddingPage(categoryId: categoryId, whichCategory: categoryName));
                     },
                     child: Row(
                       children: [
@@ -105,16 +108,22 @@ class ContentPage extends StatelessWidget {
             ),
 
 
-            Container(
-              width: double.infinity,
-              decoration: BoxDecoration(color: Color(0xffececec), borderRadius: BorderRadius.vertical(bottom: Radius.circular(18))),
-              child: ContentWidget(content: contents[0]["content"],
-                imageLink:contents[0]["image"] ,
-                title: contents[0]["title"],
-              ),
-            ),
+            for(var content in contents)
+              showContent(content)
           ]
       ),
     );
+  }
+
+
+  Widget showContent(Map content){
+    if(content["title"] !="link"){
+      return  ContentWidget(content: content["content"],
+          imageLink: content["image"] ,
+          title: content["title"],);
+
+    }else{
+      return LinkWidget(link: content["content"], imageLink: content["image"]);
+    }
   }
 }
