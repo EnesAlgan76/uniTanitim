@@ -12,12 +12,12 @@ import 'package:uni_tanitim/widgets/imageGridWidget.dart';
 
 class AddingPage extends StatelessWidget {
   String whichCategory;
-//
   String categoryId;
   AddingPage({required this.categoryId,required this.whichCategory});
 
   @override
   Widget build(BuildContext context) {
+//
 
     GetxControllerClass getxController = Get.put(GetxControllerClass());
     final firebaseStorage = FirebaseStorage.instance;
