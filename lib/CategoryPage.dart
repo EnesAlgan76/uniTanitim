@@ -1,9 +1,11 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:uni_tanitim/ContentPage.dart';
 
 import 'FirebaseOperations.dart';
+import 'GetxControllerClass.dart';
 import 'models/Content.dart';
 import 'models/HomeCategoryContents.dart';
 
@@ -18,8 +20,7 @@ class CategoryPage extends StatefulWidget {
 
 class _CategoryPageState extends State<CategoryPage> {
   FirebaseOperations firestore = FirebaseOperations();
-
-
+  GetxControllerClass getxController = Get.put(GetxControllerClass());
 
   @override
   Widget build(BuildContext context) {
@@ -62,31 +63,47 @@ class _CategoryPageState extends State<CategoryPage> {
               child: Text(widget.subtitle,style: TextStyle(fontSize: 18,color: Colors.white),),
             ),
 
-            FutureBuilder(
-                future: firestore.getPlaceUni(title : widget.title),
-                builder: (context,AsyncSnapshot snapshot){
-                  if(snapshot.hasData){
-                    return Padding(
-                      padding: EdgeInsets.only(bottom: 15),
-                      child: Container(
-                        height: 300,
-                        child: ListView(
-                          shrinkWrap: true,
-                          scrollDirection: Axis.horizontal,
-                          children: [
-                            //for(var i in resimler())
-                            for(var i in snapshot.data)
-                              Fakuteler(i["categoryId"],i["categoryName"],i["description"],i["coverImage"],i["contents"],i["galleryImages"]),
-                          ],
-                        ),
-                      ),
-                    );
-                  }
-                  else{
-                    return Center();
-                  }
-                }
-            ),
+
+           Padding(
+             padding: EdgeInsets.only(bottom: 15),
+             child: Container(
+               height: 300,
+               child: ListView(
+                 shrinkWrap: true,
+                 scrollDirection: Axis.horizontal,
+                 children: [
+                   for(var i in getxController.places.value)
+                   Fakuteler(i["categoryId"],i["categoryName"],i["description"],i["coverImage"],i["contents"],i["galleryImages"]),
+                 ],
+               ),
+             ),
+           ),
+
+            // FutureBuilder(
+            //     future: getxController.places.value,//firestore.getPlaceUni(title : widget.title),
+            //     builder: (context,AsyncSnapshot snapshot){
+            //       if(snapshot.hasData){
+            //         return Padding(
+            //           padding: EdgeInsets.only(bottom: 15),
+            //           child: Container(
+            //             height: 300,
+            //             child: ListView(
+            //               shrinkWrap: true,
+            //               scrollDirection: Axis.horizontal,
+            //               children: [
+            //                 //for(var i in resimler())
+            //                 for(var i in snapshot.data)
+            //                   Fakuteler(i["categoryId"],i["categoryName"],i["description"],i["coverImage"],i["contents"],i["galleryImages"]),
+            //               ],
+            //             ),
+            //           ),
+            //         );
+            //       }
+            //       else{
+            //         return Center();
+            //       }
+            //     }
+            // ),
 
             Padding(
               padding: EdgeInsets.only(left: 15,bottom: 15),

@@ -17,7 +17,6 @@ class AddingPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-//
 
     GetxControllerClass getxController = Get.put(GetxControllerClass());
     final firebaseStorage = FirebaseStorage.instance;

@@ -3,12 +3,11 @@ import 'package:get/get.dart';
 import 'package:uni_tanitim/CategoryPage.dart';
 import 'package:uni_tanitim/FirebaseOperations.dart';
 
+import 'GetxControllerClass.dart';
+
 class Homepage extends StatelessWidget {
   FirebaseOperations firebaseOperations = FirebaseOperations();
-
-
-
-
+  GetxControllerClass getxController = Get.put(GetxControllerClass());
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -37,7 +36,8 @@ class Homepage extends StatelessWidget {
                     // child: Text("Add Category")),
                     for(int i=0; i<snapshot.data.length; i++)
                       GestureDetector(
-                        onTap: (){
+                        onTap: () async{
+                          await getxController.getData(snapshot.data[i]["title"]);
                           Navigator.push(context, MaterialPageRoute(builder: (context) => CategoryPage(title: snapshot.data[i]["title"], subtitle: snapshot.data[i]["subtitle"],)));
                         },
                         child: Container(
