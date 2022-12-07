@@ -23,14 +23,8 @@ class FirebaseOperations{
 
 
   Future<List> getPlaceUni({required String title}) async{
-    var placeDocuments =await firestore.collection("homeCategoryContent").get();
-    List result = [];
-    for (var i in placeDocuments.docs){
-      if(i.data()["title"] == title){
-        result.add(i);
-      }
-    }
-    return result;
+    var placeDocuments =await firestore.collection("homeCategoryContent").where("title", isEqualTo: title).get();
+    return placeDocuments.docs;
   }
 
   Future<void> addData(HomeCategoryContents homeCategoryContents) async{
