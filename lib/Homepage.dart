@@ -27,6 +27,7 @@ class Homepage extends StatelessWidget {
             future: firebaseOperations.getHomeCategories(),
             builder: ((context, AsyncSnapshot snapshot) {
               if(snapshot.data !=null){
+
                 return ListView(
                   children: [
                     // ElevatedButton(
@@ -37,7 +38,7 @@ class Homepage extends StatelessWidget {
                     for(int i=0; i<snapshot.data.length; i++)
                       GestureDetector(
                         onTap: () async{
-                          await getxController.getData(snapshot.data[i]["title"]);
+                          await getxController.getPlacesGetX(title: snapshot.data[i]["title"]);
                           Navigator.push(context, MaterialPageRoute(builder: (context) => CategoryPage(title: snapshot.data[i]["title"], subtitle: snapshot.data[i]["subtitle"],)));
                         },
                         child: Container(
