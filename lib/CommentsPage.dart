@@ -140,7 +140,7 @@ class _CommentsPageState extends State<CommentsPage> {
                                 if(commentController.text!=""){
                                   Comment comment = Comment(comment: commentController.text, title: "kampüs",
                                       date: widget.currentTime, likes: 0, placeId: widget.placeId, commentId: "null", isLiked: false);
-                                  //firestore.addComments2(comment);
+                                  firestore.addComments2(comment);
                                   Get.snackbar(
                                       "Yorum Gönderildi",
                                       "",
